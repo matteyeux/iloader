@@ -1,12 +1,12 @@
-CC = gcc
+CC = xcrun -sdk iphoneos clang
 CFLAGS = -Wall -W -pedantic
 CFLAGS += -Wno-long-long
 CFLAGS += -O2
 CFLAGS += -DUSE_SIGNAL=2
-CFLAGS += -march=armv7 -mthumb
+CFLAGS += -arch armv7 -mthumb
 
 LD = gcc
-LDFLAGS =
+LDFLAGS = -arch armv7
 LDLIBS =
 
 SOURCES = \
@@ -21,7 +21,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all: iloader
 
 iloader: $(OBJECTS)
-	$(LD) -o $@ $(LDFLAGS) $^ $(LDLIBS)
+	$(CC) -o $@ $(LDFLAGS) $^ $(LDLIBS)
 
 clean:
 	-$(RM) $(OBJECTS)
